@@ -1,0 +1,408 @@
+/* ========================================
+   LOVE LETTER PAGE STYLES
+   ======================================== */
+
+/* ============================
+   HERO
+   ============================ */
+.letter-hero {
+  background: linear-gradient(135deg, #2e0a1a 0%, #5a1230 50%, #8b1a45 100%);
+}
+
+/* ============================
+   ENVELOPE SECTION
+   ============================ */
+.envelope-section {
+  background: var(--cream);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.envelope-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.envelope {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+  transform-style: preserve-3d;
+}
+
+.envelope:hover {
+  transform: scale(1.05);
+}
+
+.envelope-body {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, #fce4ec 0%, #f9d5e5 100%);
+  border-radius: 4px 4px 12px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 15px 50px rgba(232, 82, 122, 0.25);
+  border: 2px solid rgba(232, 82, 122, 0.2);
+}
+
+.envelope-icon {
+  font-size: 3.5rem;
+  animation: heartbeat 2s ease-in-out infinite;
+  display: block;
+}
+
+.envelope-body p {
+  color: var(--rose);
+  font-size: 1.4rem;
+}
+
+/* Flap (top triangle) */
+.envelope-flap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  z-index: 2;
+  clip-path: polygon(0 0, 100% 0, 50% 60%);
+  background: linear-gradient(135deg, #f9d5e5 0%, #fce4ec 100%);
+  transform-origin: top center;
+  transition: transform 0.6s ease;
+  border-bottom: 1px solid rgba(232,82,122,0.15);
+}
+
+/* Left / Right triangles */
+.envelope::before,
+.envelope::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 50%;
+  height: 140px;
+  background: rgba(232, 82, 122, 0.08);
+  z-index: 1;
+}
+
+.envelope::before {
+  left: 0;
+  clip-path: polygon(0 100%, 100% 100%, 100% 0);
+}
+
+.envelope::after {
+  right: 0;
+  clip-path: polygon(0 100%, 100% 100%, 0 0);
+}
+
+/* Opened state */
+.envelope.opened .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+/* ============================
+   LETTER SECTION
+   ============================ */
+.letter-section {
+  background: var(--cream);
+  padding-top: 2rem;
+}
+
+/* The paper */
+.letter-paper {
+  max-width: 720px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 4px;
+  padding: 4rem 5rem;
+  position: relative;
+  box-shadow:
+    0 2px 4px rgba(200,80,100,0.06),
+    0 10px 30px rgba(200,80,100,0.12),
+    0 30px 80px rgba(0,0,0,0.08);
+  /* Paper texture via gradient */
+  background-image:
+    linear-gradient(rgba(232,82,122,0.03) 1px, transparent 1px);
+  background-size: 100% 2.2rem;
+}
+
+/* Horizontal ruled lines */
+.letter-lines {
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent calc(2.2rem - 1px),
+    rgba(232,82,122,0.07) calc(2.2rem - 1px),
+    rgba(232,82,122,0.07) 2.2rem
+  );
+  background-position: 0 5rem;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Decorative corners */
+.letter-deco {
+  position: absolute;
+  font-size: 1.8rem;
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.letter-deco-tl { top: 1.5rem; left: 1.5rem; }
+.letter-deco-tr { top: 1.5rem; right: 1.5rem; }
+.letter-deco-bl { bottom: 1.5rem; left: 1.5rem; }
+.letter-deco-br { bottom: 1.5rem; right: 1.5rem; }
+
+/* Vertical red margin line */
+.letter-paper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 4.5rem;
+  bottom: 0;
+  width: 2px;
+  background: rgba(232, 82, 122, 0.12);
+  pointer-events: none;
+}
+
+/* All content above lines */
+.letter-header,
+.letter-body,
+.letter-signoff {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.letter-header {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px dashed rgba(232, 82, 122, 0.2);
+}
+
+.letter-date {
+  font-size: 0.85rem;
+  color: var(--rose);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.8rem;
+}
+
+.letter-to {
+  font-size: 1.8rem;
+  color: var(--dark);
+}
+
+/* Body */
+.letter-body p {
+  font-family: 'Lato', sans-serif;
+  font-size: 1rem;
+  line-height: 2.2rem;
+  color: var(--dark);
+  margin-bottom: 0;
+  text-align: justify;
+}
+
+.letter-body p strong {
+  color: var(--rose);
+  font-weight: 700;
+}
+
+/* Sign off */
+.letter-signoff {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px dashed rgba(232, 82, 122, 0.2);
+}
+
+.letter-signoff p {
+  color: var(--soft-dark);
+  opacity: 0.7;
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.letter-signature {
+  font-size: 2rem !important;
+  color: var(--dark) !important;
+  opacity: 1 !important;
+  margin-bottom: 1rem !important;
+}
+
+.letter-seals {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+}
+
+/* ============================
+   PROMISES SECTION
+   ============================ */
+.promises-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.promises-bg {
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-dark);
+  z-index: 0;
+}
+
+.promises-section .section-title,
+.promises-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.promises-section .section-title .pre-title,
+.promises-section .section-title p {
+  color: var(--blush);
+  opacity: 0.8;
+}
+
+.promises-section .section-title h2 {
+  color: white;
+}
+
+.promises-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.promise-item {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(232, 82, 122, 0.2);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.promise-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  border-color: rgba(232, 82, 122, 0.45);
+}
+
+.promise-icon {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.promise-item h4 {
+  color: white;
+  font-size: 1rem;
+  margin-bottom: 0.7rem;
+}
+
+.promise-item p {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* ============================
+   CTA SECTION
+   ============================ */
+.letter-cta {
+  background: linear-gradient(135deg, #2e0a1a 0%, #5a1230 100%);
+  padding: 5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-cta::before {
+  content: '💌';
+  position: absolute;
+  font-size: 20rem;
+  opacity: 0.04;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+@media (max-width: 768px) {
+  .letter-paper {
+    padding: 2.5rem 1.5rem;
+    border-radius: 12px;
+  }
+
+  .letter-paper::before {
+    display: none;
+  }
+
+  .promises-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .letter-body p {
+    text-align: left;
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+
+  .letter-salutation {
+    font-size: 1.5rem !important;
+  }
+
+  .letter-sign-name {
+    font-size: 2rem !important;
+  }
+
+  .letter-cta {
+    padding: 4rem 1.2rem;
+  }
+
+  .letter-cta div[style*="flex"] {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .promises-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .envelope {
+    width: 220px;
+    height: 145px;
+  }
+
+  .letter-paper {
+    padding: 1.8rem 1.1rem;
+  }
+
+  .letter-deco-tl,
+  .letter-deco-tr,
+  .letter-deco-bl,
+  .letter-deco-br {
+    display: none;
+  }
+
+  .promise-item {
+    padding: 1rem;
+  }
+
+  .promise-icon {
+    font-size: 1.8rem;
+  }
+}
